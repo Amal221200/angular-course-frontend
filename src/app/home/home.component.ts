@@ -76,7 +76,7 @@ export class HomeComponent {
   }
 
   fetchProducts(page: number, perPage: number) {
-    this.productsService.getProducts(environment.apiUrl, { page, perPage }).subscribe({
+    this.productsService.getProducts(`${environment.apiUrl}/api/clothes`, { page, perPage }).subscribe({
       next: (products: Products) => { // The next method takes the response data as the first argument.
         this.products = products.items;
         this.totalRecords = products.total
@@ -88,7 +88,7 @@ export class HomeComponent {
   }
 
   addProduct(product: Product) {
-    this.productsService.addProduct(environment.apiUrl, product).subscribe({
+    this.productsService.addProduct(`${environment.apiUrl}/api/clothes`, product).subscribe({
       next: (_product: Product) => {
         this.fetchProducts(this.page, this.rows);
         this.toast?.messageService.add({ severity: 'success', summary: 'Success', detail: 'Product Added', life: 3000 });
@@ -100,7 +100,7 @@ export class HomeComponent {
   }
 
   editProduct(product: Product, id: number) {
-    this.productsService.updateProduct(`${environment.apiUrl}/${id}`, product).subscribe({
+    this.productsService.updateProduct(`${environment.apiUrl}/api/clothes/${id}`, product).subscribe({
       next: (_product: Product) => {
         this.fetchProducts(this.page, this.rows);
         this.toast?.messageService.add({ severity: 'success', summary: 'Edited', detail: 'Product Edited', life: 3000 });
@@ -112,7 +112,7 @@ export class HomeComponent {
   }
 
   deleteProduct(id: number) {
-    this.productsService.deleteProduct(`${environment.apiUrl}/${id}`).subscribe({
+    this.productsService.deleteProduct(`${environment.apiUrl}/api/clothes/${id}`).subscribe({
       next: () => {
         this.fetchProducts(this.page, this.rows);
         this.toast?.messageService.add({ severity: 'danger', summary: 'Deleted', detail: 'Product Deleted', life: 3000 });

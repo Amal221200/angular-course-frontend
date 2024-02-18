@@ -1,0 +1,46 @@
+<p-toast #toast></p-toast>
+<div class="column gap-1">
+    <!-- Add Product Button -->
+
+    <p-button type="button" icon="pi pi-plus" (click)="toggleAddPopup()" label="Add Product"
+        class="add-product-btn"></p-button>
+    <section class="wrap row gap-1 space-between">
+        @for (product of products; track product.id; let idx = $index;let fir = $first; let lst = $last;
+        let ev = $even; let od = $odd; let c = $count) {
+        <!-- 
+            // Special variable that comes with the for block
+            $count	Number of items in a collection iterated over
+            $index	Index of the current row
+            $first	Whether the current row is the first row
+            $last	Whether the current row is the last row
+            $even	Whether the current row index is even
+            $odd	Whether the current row index is odd
+
+            track is like the key
+        -->
+
+        <!-- This is how you pass props to the child element  using []. -->
+        <app-product [product]="product" (edit)="toggleEditPopup($event)"
+            (delete)="toggleDeletePopup($event)"></app-product>
+        <!-- This is how you listen to an event emitter  using () and passing the name of the event emitter. -->
+        }
+        @empty {
+        <p> There are no products. </p>
+        }
+    </section>
+
+    <!-- Paginator   -->
+    <section>
+        <p-paginator (onPageChange)="onPageChange($event)" #paginator [first]="first" [rows]="rows"
+            [totalRecords]="totalRecords" [rowsPerPageOptions]="rowsPerPageOptions"></p-paginator>
+    </section>
+</div>
+
+
+<!-- Popups -->
+
+<app-edit-popup header="Add Product" [(display)]="displayAddPopup" (confirm)="onConfirmAdd($event)">
+</app-edit-popup>
+<app-edit-popup header="Edit Product" [product]="selectedProduct" [(display)]="displayEditPopup"
+    (confirm)="onConfirmEdit($event)">
+</app-edit-popup>

@@ -115,7 +115,7 @@ export class HomeComponent {
     this.productsService.deleteProduct(`${environment.apiUrl}/api/clothes/${id}`).subscribe({
       next: () => {
         this.fetchProducts(this.page, this.rows);
-        this.toast?.messageService.add({ severity: "success", summary: 'Deleted', detail: 'Product Deleted', life: 3000 });
+        this.toast?.messageService.add({ severity: "error", summary: 'Deleted', detail: 'Product Deleted', life: 3000 });
       },
       error: (error) => {
         console.log(error, 'Delete Product')

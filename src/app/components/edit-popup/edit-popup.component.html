@@ -1,27 +1,24 @@
 <p-dialog [header]="header" [(visible)]="display" [modal]="true" [closable]="false">
-    <div class="column gap-1">
+    <div class="column gap-1 form-wrapper" [formGroup]="productForm">
         <div class="row gap-05">
             <label class="price-label" for="name">Name:</label>
-            <input type="text" name="name" id="name" [(ngModel)]="product.name">
+            <input type="text" name="name" id="name" formControlName="name" >
         </div>
 
         <div class="row gap-05">
             <label class="price-label" for="price">Price:</label>
-            <input type="text" name="price" id="price" [(ngModel)]="product.price">
+            <input type="text" name="price" id="price" formControlName="price">
         </div>
 
         <div class="row gap-05">
             <label class="price-label" for="image">Image:</label>
-            <input type="text" name="image" id="image" [(ngModel)]="product.image">
+            <input type="text" name="image" id="image" formControlName="image">
         </div>
 
-        <div class="row gap-05">
-            <label class="price-label" for="name">Rating:</label>
-            <p-rating [(ngModel)]="product.rating" [cancel]="false"></p-rating>
-        </div>
+        <p-rating formControlName="rating" class="rating" [cancel]="false"></p-rating>
     </div>
     <p-footer class="row gap-05">
-        <button pButton type="button" pButton icon="pi pi-check" (click)="onConfrim()" label="Confirm"></button>
+        <button pButton type="button" pButton icon="pi pi-check" [class.disabled]="!productForm.valid" (click)="onConfrim()" label="Confirm"></button>
         <button pButton type="button" pButton icon="pi pi-times" (click)="onCancel()" label="Cancel" class="p-button-danger"></button>
     </p-footer>
 </p-dialog>

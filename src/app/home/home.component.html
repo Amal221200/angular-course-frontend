@@ -4,25 +4,12 @@
 
     <p-button type="button" icon="pi pi-plus" (click)="toggleAddPopup()" label="Add Product"
         class="add-product-btn"></p-button>
-    <section class="wrap row gap-1 space-between">
-        @for (product of products; track product.id; let idx = $index;let fir = $first; let lst = $last;
-        let ev = $even; let od = $odd; let c = $count) {
-        <!-- 
-            // Special variable that comes with the for block
-            $count	Number of items in a collection iterated over
-            $index	Index of the current row
-            $first	Whether the current row is the first row
-            $last	Whether the current row is the last row
-            $even	Whether the current row index is even
-            $odd	Whether the current row index is odd
 
-            track is like the key
-        -->
 
-        <!-- This is how you pass props to the child element  using []. -->
+    <section class="wrap row gap-2 justify-around">
+        @for (product of products; track product.id) {
         <app-product [product]="product" (edit)="toggleEditPopup($event)"
             (delete)="toggleDeletePopup($event)"></app-product>
-        <!-- This is how you listen to an event emitter  using () and passing the name of the event emitter. -->
         }
         @empty {
         <p> There are no products. </p>

@@ -6,11 +6,13 @@ import { ToastModule } from "primeng/toast";
 import { ConfirmPopupModule } from "primeng/confirmpopup";
 import { ConfirmationService } from "primeng/api"
 import { Product } from '../../../types';
+import { TruncatePipe } from '../../pipes/truncate.pipe';
+import { PricePipe } from '../../pipes/price.pipe';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [RatingModule, FormsModule, ButtonModule, ToastModule, ConfirmPopupModule],
+  imports: [RatingModule, FormsModule, ButtonModule, ToastModule, ConfirmPopupModule, TruncatePipe, PricePipe],
   providers: [ConfirmationService],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
